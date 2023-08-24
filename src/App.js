@@ -1,9 +1,15 @@
 import { useState } from 'react';
 import './App.css';
-// import About from './component/About';
+import About from './component/About';
 import Navbar from './component/Navbar';
 import TextForm from './component/TextForm';
 import Alert from './component/Alert';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  // Link
+} from "react-router-dom";
 
 function App() {
   const [themeColor, setThemeColor] = useState('light');
@@ -32,15 +38,16 @@ function App() {
   }
   return (
     <>
-      {/* <Navbar  /> */}
-      <Navbar title="TextUtils" mode={themeColor} toggleThemeColor={toggleThemeColor} />
-      <Alert alert={alert} />
-      <div className="container  my-3">
-        <TextForm heading="Enter the text to analyze" mode={themeColor} />
-
-        {/* <About/> */}
-
-      </div>
+      <Router>
+        <Navbar title="TextUtils" mode={themeColor} toggleThemeColor={toggleThemeColor} />
+        <Alert alert={alert} />
+        <div className="container  my-3">
+          <Routes>
+            <Route exact path="/about" element={<About />} />
+            <Route exact path="/" element={<TextForm heading="Enter the text to analyze" mode={themeColor} />} />
+          </Routes>
+        </div>
+      </Router>
     </>
   );
 }
