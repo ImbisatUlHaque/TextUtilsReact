@@ -21,11 +21,7 @@ export default function TextForm(props) {
     }
 
     const handleCopy = () => {
-        // let copyText = text;
-        var copyText = document.getElementById("myBox");
-        copyText.select();
-        navigator.clipboard.writeText(copyText.value);
-        document.getSelection().removeAllRanges();
+        navigator.clipboard.writeText(text);
     }
 
     const handlePaste = () => {
@@ -61,7 +57,7 @@ export default function TextForm(props) {
                 </div>
                 <div className="container my-3">
                     <h1>Your Text Summary</h1>
-                    <p>{text.split(" ").filter((element)=>{return element.length !== 0}).length} words and {text.length} Character</p>
+                    <p>{text.split(/\s+/).filter((element)=>{return element.length !== 0}).length} words and {text.length} Character</p>
                     <p>{0.008 * text.split(" ").filter((element)=>{return element.length !== 0}).length} Minutes to read</p>
                     <h2>Preview</h2>
                     <p>{text.length > 0 ? text : "Enter something in the textbox above to preview it here"}</p>
